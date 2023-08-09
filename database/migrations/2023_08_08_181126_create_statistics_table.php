@@ -12,12 +12,12 @@ return new class extends Migration {
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date')->default(now());
+            $table->date('date');
             $table->string('country', 3);
             $table->integer('count');
             $table->foreignId('publisher_id')->constrained();
             $table->foreignId('advertisement_id')->constrained();
-
+            $table->timestamps();
         });
     }
 
