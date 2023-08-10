@@ -6,19 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Publisher extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $fillable = [
         'name',
         'user_id',
-        'status',
+        'active',
     ];
 
     public $casts = [
-        'status' => 'boolean'
+        'active' => 'boolean'
     ];
 
     public function user(): belongsTo
@@ -38,6 +39,6 @@ class Publisher extends Model
 
     public function isActive(): bool
     {
-        return $this->status;
+        return $this->active;
     }
 }

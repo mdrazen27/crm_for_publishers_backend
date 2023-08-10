@@ -19,7 +19,7 @@ class PublisherFactory extends Factory
     {
         return [
             'name' => fake()->company,
-            'status' => rand(0,1),
+            'active' => rand(0,1),
             'user_id' => User::factory()->publisher()
         ];
     }

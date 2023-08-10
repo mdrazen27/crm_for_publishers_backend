@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('publishers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
             $table->foreignId('user_id')->unique()->constrained();
             $table->timestamps();
             $table->softDeletes();

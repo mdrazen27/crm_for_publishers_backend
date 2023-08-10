@@ -20,4 +20,10 @@ class AuthRequest extends FormRequest
             'password' => 'required|string|max:255',
         ];
     }
+
+    public function messages(){
+        return [
+          'email.exists' => 'Email not found!'
+        ];
+    }
 }
