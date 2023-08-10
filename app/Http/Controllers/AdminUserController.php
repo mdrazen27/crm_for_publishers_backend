@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Actions\CreateUserAction;
+use App\Http\Actions\UpdateUserAction;
 use App\Http\Requests\CreateAdminUserRequest;
 use App\Http\Requests\UpdateAdminUserRequest;
 use App\Http\Resources\UserResource;
@@ -9,14 +11,18 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
+    private CreateUserAction $createUserAction;
+    private UpdateUserAction $updateUserAction;
 
-    public function __construct()
+    public function __construct(CreateUserAction $createUserAction, UpdateUserAction $updateUserAction)
     {
+        $this->createUserAction = $createUserAction;
+        $this->updateUserAction = $updateUserAction;
         $this->authorizeResource(User::class, 'admin_user');
+
     }
 
     /**
@@ -33,13 +39,7 @@ class AdminUserController extends Controller
      */
     public function store(CreateAdminUserRequest $request): UserResource
     {
-        $adminUser = new User;
-        $adminUser->email = $request->email;
-        $adminUser->password = Hash::make($request->password);
-        $adminUser->create_user_id = Auth::user()->id;
-        $adminUser->role_id = 1;
-        $adminUser->save();
-
+        $adminUser = $this->createUserAction->execute($request->email, $request->password, Auth::id(), role_id: 1);
         return UserResource::make($adminUser);
     }
 
@@ -56,10 +56,8 @@ class AdminUserController extends Controller
      */
     public function update(UpdateAdminUserRequest $request, User $adminUser): UserResource
     {
-        $adminUser->email = $request->email;
-        $adminUser->update_user_id = Auth::user()->id;
-        $adminUser->save();
-        return UserResource::make($adminUser);
+        $this->updateUserAction->execute($adminUser, $request->email, Auth::id());
+        return UserResource::make($adminUser->refresh());
     }
 
     /**
