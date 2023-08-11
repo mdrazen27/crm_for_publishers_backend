@@ -12,6 +12,11 @@ class Statistic extends Model
 
     //todo check whether single model can communicate with two DBs one being MySql and other Redis
 
+    protected $casts = [
+        'count' => 'integer',
+        'date' => 'date:m.d.Y'
+    ];
+
 
     public function publisher(): BelongsTo
     {
