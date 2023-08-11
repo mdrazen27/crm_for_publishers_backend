@@ -22,14 +22,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/role', [RoleController::class, 'index'])->name('roles');
-    Route::resource('/admin-user', AdminUserController::class);
-    Route::resource('/publisher', PublisherController::class);
-    Route::post('/toggle-publisher-status/{publisher}', [PublisherController::class, 'togglePublisherStatus'])
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles');
+    Route::resource('/admin-users', AdminUserController::class);
+    Route::resource('/publishers', PublisherController::class);
+    Route::post('/publishers/{publisher}/toggle-status', [PublisherController::class, 'togglePublisherStatus'])
         ->name('toggle-publisher-status');
-    Route::get('/publisher-profile', [PublisherController::class, 'viewPublisherProfile']);
-    Route::resource('/advertisement', AdvertisementController::class);
-    Route::post('/toggle-advertisement-status/{advertisement}', [AdvertisementController::class, 'toggleAdvertisementStatus'])
+    Route::get('/publisher-profiles', [PublisherController::class, 'viewPublisherProfile'])
+        ->name('publisher-profile');
+    Route::resource('/advertisements', AdvertisementController::class);
+    Route::post('/advertisements/{advertisement}/toggle-status', [AdvertisementController::class, 'toggleAdvertisementStatus'])
         ->name('toggle-advertisement-status');
     Route::get('/statistics/count-per-country-and-date', [StatisticController::class, 'countPerCountryAndDate'])
         ->name('stats-per-country-and-date');
