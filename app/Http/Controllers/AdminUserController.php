@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Actions\CreateUserAction;
-use App\Http\Actions\UpdateUserAction;
+use App\Actions\CreateUserAction;
+use App\Actions\UpdateUserAction;
 use App\Http\Requests\CreateAdminUserRequest;
 use App\Http\Requests\UpdateAdminUserRequest;
 use App\Http\Resources\UserResource;
@@ -14,15 +14,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
-    private CreateUserAction $createUserAction;
-    private UpdateUserAction $updateUserAction;
 
-    public function __construct(CreateUserAction $createUserAction, UpdateUserAction $updateUserAction)
+    public function __construct(private CreateUserAction $createUserAction, private UpdateUserAction $updateUserAction)
     {
-        $this->createUserAction = $createUserAction;
-        $this->updateUserAction = $updateUserAction;
         $this->authorizeResource(User::class, 'admin_user');
-
     }
 
     /**
