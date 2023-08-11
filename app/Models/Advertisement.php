@@ -6,20 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Advertisement extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
         'url',
-        'status',
+        'active',
         'publisher_id',
     ];
 
     protected $casts = [
-        'status' => 'boolean',
+        'active' => 'boolean',
     ];
 
     public function publisher(): BelongsTo

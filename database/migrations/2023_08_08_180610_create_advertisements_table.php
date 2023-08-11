@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name', 255);
             $table->string('url', 255);
-            $table->boolean('status')->default(0);
+            $table->boolean('active')->default(0);
             $table->foreignId('publisher_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

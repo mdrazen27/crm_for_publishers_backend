@@ -20,7 +20,7 @@ class AdvertisementFactory extends Factory
         return [
             'name' => fake()->domainName,
             'url'  => fake()->url,
-            'status' => rand(0,1),
+            'active' => rand(0,1),
             'publisher_id' => Publisher::inRandomOrder()->first('id')->id
         ];
     }
