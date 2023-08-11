@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\RoleController;
@@ -26,4 +27,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/toggle-publisher-status/{publisher}',[PublisherController::class,'togglePublisherStatus'])
         ->name('toggle-publisher-status');
     Route::get('/publisher-profile',[PublisherController::class,'viewPublisherProfile']);
+    Route::resource('/advertisement', AdvertisementController::class);
+    Route::post('/toggle-advertisement-status/{advertisement}',[AdvertisementController::class,'toggleAdvertisementStatus'])
+        ->name('toggle-advertisement-status');
 });
