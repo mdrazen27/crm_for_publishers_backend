@@ -77,9 +77,5 @@ class MigrateRedisStatisticsIntoMySql extends Command implements Isolatable
             }
         }
         Redis::srem(config('redis.statisticSetName'), ...$redisEntries);
-
-        echo Statistic::count();
-        echo "\n";
-        echo count(Redis::smembers('statistics'));
     }
 }
