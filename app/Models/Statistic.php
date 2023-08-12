@@ -11,11 +11,17 @@ class Statistic extends Model
 {
     use HasFactory, FilterByPublisher;
 
-    //todo check whether single model can communicate with two DBs one being MySql and other Redis
-
     protected $casts = [
         'count' => 'integer',
         'date' => 'date:m.d.Y'
+    ];
+
+    protected $fillable = [
+        'count',
+        'date',
+        'publisher_id',
+        'country',
+        'advertisement_id',
     ];
 
 
