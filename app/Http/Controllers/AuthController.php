@@ -28,10 +28,12 @@ class AuthController extends Controller
             }
         }
 
-        return new JsonResponse([
-            'message' => 'Logged in successfully!',
-            'accessToken' => $user->createToken('authToken')->plainTextToken,
-            'user' => UserResource::make($user),
-        ]);
+        return new JsonResponse(
+            [
+                'message' => 'Logged in!',
+                'accessToken' => $user->createJwtToken(),
+                'user' => UserResource::make($user),
+            ]
+        );
     }
 }

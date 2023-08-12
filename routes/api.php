@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/roles', [RoleController::class, 'index'])->name('roles');
     Route::resource('/admin-users', AdminUserController::class);
     Route::resource('/publishers', PublisherController::class);

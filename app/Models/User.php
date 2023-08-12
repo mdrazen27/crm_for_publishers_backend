@@ -3,11 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
+use Firebase\JWT\JWT;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -58,4 +61,22 @@ class User extends Authenticatable
         return $this->role_id === 2;
     }
 
+    public function createJwtToken(): string
+    {
+        return JWT::encode([
+                'user_id' => $this->id,
+                'iss' => config('app.url'),
+                'iat' => Carbon::now()->timestamp,
+                'exp' => Carbon::now()->addWeek()->timestamp
+            ]
+            , config('jwt.key'), 'HS256');
+    }
+
+
+    public function delete()
+    {
+        $this->email = Hash::make(20)."-". $this->id . "@scrambled.com";
+        $this->save();
+        return parent::delete();
+    }
 }
