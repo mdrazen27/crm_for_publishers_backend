@@ -15,7 +15,7 @@ class FilterByPublisherScope implements Scope
     public function apply(Builder $builder, Model $model): void
     {
         $user = Auth::user();
-        if ($user->isPublisher()) {
+        if ($user?->isPublisher()) {
             $builder->where('publisher_id', $user->publisher->id);
         }
     }
