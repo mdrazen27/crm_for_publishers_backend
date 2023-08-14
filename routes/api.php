@@ -35,4 +35,5 @@ Route::group(['middleware' => ['auth:api']], function () {
         ->name('toggle-advertisement-status');
     Route::get('/statistics/count-per-country-and-date', [StatisticController::class, 'countPerCountryAndDate'])
         ->name('stats-per-country-and-date');
+    Route::post('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
 });

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -33,6 +35,25 @@ class AuthController extends Controller
                 'message' => 'Logged in!',
                 'accessToken' => $user->createJwtToken(),
                 'user' => UserResource::make($user),
+            ]
+        );
+    }
+
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
+    {
+        $user = Auth::user();
+        if (!Hash::check($request->oldPassword, $user->password)) {
+            return new JsonResponse([
+                'message' => 'Wrong password!',
+                'success' => false
+            ], 422);
+        }
+        $user->password = $request->newPassword;
+        $user->save();
+
+        return new JsonResponse(
+            [
+                'message' => 'Successfully changed password!',
             ]
         );
     }
