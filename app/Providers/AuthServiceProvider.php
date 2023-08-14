@@ -28,17 +28,25 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Auth::viaRequest('jwt', function (Request $request) {
-            try {
-                $bearerToken = $request->bearerToken();
-                if (!$bearerToken) {
-                    return null;
-                }
-                $tokenPayload = JWT::decode($bearerToken, new Key(config('jwt.key'), 'HS256'));
-                return User::firstWhere('id', $tokenPayload->user_id);
-            } catch (\Exception $th) {
-                Log::error($th);
-                return null;
-            }
+            return $this->authenticateUser($request->bearerToken());
         });
+    }
+
+    private function authenticateUser(string $bearerToken): ?User
+    {
+        if (!$bearerToken) {
+            return null;
+        }
+        try {
+            $tokenPayload = JWT::decode($bearerToken, new Key(config('jwt.key'), 'HS256'));
+            $user = User::firstWhere('id', $tokenPayload->user_id);
+            if ($user->isAdmin() || $user->publisher->isActive()) {
+                return $user;
+            }
+            return null;
+        } catch (\Exception|\Error $e) {
+            Log::error($e);
+            return null;
+        }
     }
 }
