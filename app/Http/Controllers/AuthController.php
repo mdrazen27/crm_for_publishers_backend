@@ -17,14 +17,14 @@ class AuthController extends Controller
             return new JsonResponse([
                 'message' => 'Wrong password!',
                 'success' => false
-            ], 403);
+            ], 422);
         }
         if ($user->role_id === 2) {
             if (!$user->publisher->isActive()) {
                 return new JsonResponse([
                     'message' => 'Your account has been suspended!',
                     'success' => false
-                ], 403);
+                ], 422);
             }
         }
 
@@ -33,6 +33,15 @@ class AuthController extends Controller
                 'message' => 'Logged in!',
                 'accessToken' => $user->createJwtToken(),
                 'user' => UserResource::make($user),
+            ]
+        );
+    }
+
+    public function unauthenticated():JsonResponse
+    {
+        return new JsonResponse(
+            [
+                'message' => 'Unauthenticated.',
             ]
         );
     }
