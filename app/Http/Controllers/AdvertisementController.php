@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Http\Resources\AdvertisementResource;
 use App\Models\Advertisement;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,9 +22,29 @@ class AdvertisementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return AdvertisementResource::collection(Advertisement::all());
+        if ($request->sort_by === 'created_at') {
+            $advertisements = Advertisement::orderBy('created_at', $request->sort_desc ? 'desc' : 'asc');
+        } else if ($request->sort_by === 'updated_at') {
+            $advertisements = Advertisement::orderBy('updated_at', $request->sort_desc ? 'desc' : 'asc');
+        } else {
+            $advertisements = Advertisement::query();
+        }
+        if ($request->search) {
+            $advertisements->where('name', 'like', "%$request->search%")
+                ->orWhere('url', 'like', "%$request->search%");
+            if (Auth::user()->isAdmin()) {
+                $advertisements->orWhereHas('publisher', function ($query) use ($request) {
+                    $query->where('name', 'like', "%$request->search%");
+                });
+            }
+        }
+        $itemsPerPage = 10;
+        if ($request->per_page) {
+            $itemsPerPage = intval($request->per_page);
+        }
+        return AdvertisementResource::collection($advertisements->paginate($itemsPerPage));
     }
 
     /**

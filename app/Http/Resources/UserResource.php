@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'role_id' => $this->role_id,
-            'publisherName' => $this->when($this->publisher, $this->publisher->name),
+            'publisherName' => $this->when($this->isPublisher(), $this->publisher?->name),
             'created_at' => Carbon::parse($this->created_at)->format('m-d-Y g:i A'),
             'updated_at' => Carbon::parse($this->updated_at)->format('m-d-Y g:i A'),
         ];
