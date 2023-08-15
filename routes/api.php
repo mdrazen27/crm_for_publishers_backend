@@ -33,7 +33,16 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::resource('/advertisements', AdvertisementController::class);
     Route::post('/advertisements/{advertisement}/toggle-status', [AdvertisementController::class, 'toggleAdvertisementStatus'])
         ->name('toggle-advertisement-status');
-    Route::get('/statistics/count-per-country-and-date', [StatisticController::class, 'countPerCountryAndDate'])
-        ->name('stats-per-country-and-date');
     Route::post('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
+
+    Route::group(['prefix' => '/statistics'], function(){
+        Route::get('/count-per-month', [StatisticController::class, 'countPerMonth'])
+            ->name('stats-per-month');
+        Route::get('/count-per-day', [StatisticController::class, 'countPerDay'])
+            ->name('stats-per-day');
+        Route::get('/top-ten-countries', [StatisticController::class, 'topTenCountriesByViewCount'])
+            ->name('top-ten-countries');
+        Route::get('/top-five-active-advertisements', [StatisticController::class, 'topFiveActiveAdvertisementsByViewCount'])
+            ->name('top-five-active-advertisements');
+    });
 });
