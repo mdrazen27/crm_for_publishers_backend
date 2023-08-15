@@ -9,6 +9,7 @@ use App\Http\Requests\UpdatePublisherRequest;
 use App\Http\Resources\PublisherResource;
 use App\Models\Publisher;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,10 +24,26 @@ class PublisherController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        $publishers = Publisher::whereHas('user')->get();
-        return PublisherResource::collection($publishers);
+        if ($request->sort_by === 'created_at') {
+            $publishers = Publisher::orderBy('created_at', $request->sort_desc ? 'desc' : 'asc');
+        } else if ($request->sort_by === 'updated_at') {
+            $publishers = Publisher::orderBy('updated_at', $request->sort_desc ? 'desc' : 'asc');
+        } else {
+            $publishers = Publisher::query();
+        }
+        if ($request->search) {
+            $publishers->where('name', 'like', "%$request->search%");
+            $publishers->orWhereHas('user', function ($query) use ($request) {
+                $query->where('email', 'like', "%$request->search%");
+            });
+        }
+        $itemsPerPage = 10;
+        if ($request->per_page) {
+            $itemsPerPage = intval($request->per_page);
+        }
+        return PublisherResource::collection($publishers->paginate($itemsPerPage));
     }
 
     /**

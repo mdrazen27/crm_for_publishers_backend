@@ -19,14 +19,14 @@ class AuthController extends Controller
             return new JsonResponse([
                 'message' => 'Wrong password!',
                 'success' => false
-            ], 422);
+            ], 403);
         }
         if ($user->role_id === 2) {
             if (!$user->publisher->isActive()) {
                 return new JsonResponse([
                     'message' => 'Your account has been suspended!',
                     'success' => false
-                ], 422);
+                ], 403);
             }
         }
 
@@ -46,7 +46,7 @@ class AuthController extends Controller
             return new JsonResponse([
                 'message' => 'Wrong password!',
                 'success' => false
-            ], 422);
+            ], 403);
         }
         $user->password = $request->newPassword;
         $user->save();
