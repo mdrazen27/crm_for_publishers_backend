@@ -22,6 +22,12 @@ class AuthController extends Controller
             ], 403);
         }
         if ($user->role_id === 2) {
+            if (!$user->publisher) {
+                return new JsonResponse([
+                    'message' => 'Your account has been terminated!',
+                    'success' => false
+                ], 403);
+            }
             if (!$user->publisher->isActive()) {
                 return new JsonResponse([
                     'message' => 'Your account has been suspended!',

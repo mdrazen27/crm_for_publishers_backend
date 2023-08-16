@@ -41,4 +41,13 @@ class Publisher extends Model
     {
         return $this->active;
     }
+
+    public function delete()
+    {
+        $this->user->delete();
+        foreach ($this->advertisements as $advertisement){
+            $advertisement->delete();
+        }
+        return parent::delete();
+    }
 }

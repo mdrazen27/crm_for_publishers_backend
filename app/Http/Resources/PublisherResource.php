@@ -18,7 +18,7 @@ class PublisherResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->user->email,
+            'email' => $this->user?->email,
             'active' => $this->active,
             'created_at' => Carbon::parse($this->created_at)->format('m-d-Y g:i A'),
             'updated_at' => Carbon::parse($this->updated_at)->format('m-d-Y g:i A'),
