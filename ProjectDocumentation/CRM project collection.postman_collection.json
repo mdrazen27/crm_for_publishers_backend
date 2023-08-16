@@ -1,0 +1,909 @@
+{
+	"info": {
+		"_postman_id": "a365dedb-40aa-40ba-b2ad-b9d05b0d8c96",
+		"name": "CRM project collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20126912"
+	},
+	"item": [
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Get all roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/roles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin users",
+			"item": [
+				{
+					"name": "Get all admin users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/admin-users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show admin user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/admin-users/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin-users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "email@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/admin-users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update admin user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "emails@gmail.coms",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/admin-users/21",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin-users",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete admin user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/admin-users/25",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin-users",
+								"25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publishers",
+			"item": [
+				{
+					"name": "Get all publishers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/publishers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get publisher",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/publishers/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publishers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create publisher profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "publisher@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "someName",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"description": "Optional key, if it isn't present default value is true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/publishers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publishers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update publisher profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "testtest@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "someName222234",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/publishers/27",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publishers",
+								"27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete publisher profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/publishers/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publishers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle publisher active status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/publishers/20/toggle-status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publishers",
+								"20",
+								"toggle-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View publisher profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/publisher-profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"publisher-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Advertisements",
+			"item": [
+				{
+					"name": "Get all advertisements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/advertisements",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"advertisements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get advertisement",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/advertisements/1001",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"advertisements",
+								"1001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create advertisement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "name of the add",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "http://url.com",
+									"type": "text"
+								},
+								{
+									"key": "active",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/advertisements",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"advertisements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update advertisement",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "new name",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "https://new-name.com",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/advertisements/1001",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"advertisements",
+								"1001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete advertisement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "DELETE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/advertisements/1003",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"advertisements",
+								"1003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Toggle advertisement status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/advertisements/1002/toggle-status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"advertisements",
+								"1002",
+								"toggle-status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Count per month",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/statistics/count-per-month?publisher_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"statistics",
+								"count-per-month"
+							],
+							"query": [
+								{
+									"key": "publisher_id",
+									"value": "1",
+									"description": "optional -admin only"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count per date",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/statistics/count-per-day?publisher_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"statistics",
+								"count-per-day"
+							],
+							"query": [
+								{
+									"key": "publisher_id",
+									"value": "1",
+									"description": "optional -admin only"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top ten countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/statistics/top-ten-countries?publisher_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"statistics",
+								"top-ten-countries"
+							],
+							"query": [
+								{
+									"key": "publisher_id",
+									"value": "1",
+									"description": "optional -admin only"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top five active advertisements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/statistics/top-five-active-advertisements?publisher_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"statistics",
+								"top-five-active-advertisements"
+							],
+							"query": [
+								{
+									"key": "publisher_id",
+									"value": "1",
+									"description": "optional - admin only"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login Publisher",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "publisher@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Admin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "newPassword",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "oldPassword",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "repeatPassword",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/change-password",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:8000/api",
+			"type": "string"
+		}
+	]
+}

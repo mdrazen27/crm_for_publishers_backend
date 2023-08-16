@@ -1,6 +1,8 @@
 #CRM system for managing publishers
 ##About
-System for publishers to manage their advertisements and related statistics. 
+System for publishers to manage their advertisements and view related statistics.
+Publishers are managed by administrators which can view their advertisements and 
+statistics but aren't able to do any modifications.
 
 Consists of two parts:
 - Backend: Laravel
@@ -19,7 +21,7 @@ ___
 ##Setup
 Copy contents from .env.example file into file named .env
 
-Create new database and put credentials into .env 
+Create new database and put database credentials into .env 
 
 
 Run commands in terminal
@@ -43,4 +45,13 @@ ___
 ```
     php artisan migrate-redis-statistics
 ```
-- scheduled to run every ten minutes
+- scheduled to run every ten minutes 
+
+```
+php artisan schedule:work
+```
+
+##ProjectDocumentation folder contains:
+- Postman collection with all API endpoints
+- Database ER diagram
+
