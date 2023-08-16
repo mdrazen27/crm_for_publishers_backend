@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('migrate-redis-statistics')->everyTenMinutes();
+        $schedule->command('migrate-redis-statistics --isolated')->everyTenMinutes();
     }
 
     /**

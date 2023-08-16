@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         });
     }
 
-    private function authenticateUser(string $bearerToken): ?User
+    private function authenticateUser(?string $bearerToken): ?User
     {
         if (!$bearerToken) {
             return null;

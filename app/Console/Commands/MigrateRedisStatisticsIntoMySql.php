@@ -31,7 +31,6 @@ class MigrateRedisStatisticsIntoMySql extends Command implements Isolatable
      */
     public function handle()
     {
-        echo Carbon::now();
         $redisEntries = Redis::smembers(config('redis.statisticSetName'));
         // data to migrate follows structure [publisherId][advertisementId][countryCode]
         $dataToMigrate = [];
@@ -63,7 +62,6 @@ class MigrateRedisStatisticsIntoMySql extends Command implements Isolatable
                     if ($statistics) {
                         $statistics->count += $dataPerCountry['count'];
                         $statistics->save();
-                        echo 'saved';
                     } else {
                         Statistic::create([
                             'publisher_id' => $dataPerCountry['publisherId'],
