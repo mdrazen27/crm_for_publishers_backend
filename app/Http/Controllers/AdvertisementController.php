@@ -40,6 +40,9 @@ class AdvertisementController extends Controller
                 });
             }
         }
+        if ($request->deleted) {
+            $advertisements->onlyTrashed();
+        }
         $itemsPerPage = 10;
         if ($request->per_page) {
             $itemsPerPage = intval($request->per_page);

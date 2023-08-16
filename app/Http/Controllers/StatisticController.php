@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class StatisticController extends Controller
 {
+    private string $beginningOfCurrentYear;
+
+    public function __construct()
+    {
+        $this->beginningOfCurrentYear = Carbon::now()->floorYear();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -19,7 +26,8 @@ class StatisticController extends Controller
         if ($request->publisher_id && Auth::user()->isAdmin()) {
             $statistic->where('publisher_id', $request->publisher_id);
         }
-        $statistic->where('date', '>=', Carbon::now()->year)->groupBy('month');
+        $statistic->where('date', '>=', $this->beginningOfCurrentYear)
+            ->groupBy('month');
         return new JsonResponse($statistic->get());
     }
 
@@ -29,7 +37,9 @@ class StatisticController extends Controller
         if ($request->publisher_id && Auth::user()->isAdmin()) {
             $statistic->where('publisher_id', $request->publisher_id);
         }
-        $statistic->where('date', '>=', Carbon::now())->orderBy('date')->groupBy('date');
+        $statistic->where('date', '>=', $this->beginningOfCurrentYear)
+            ->orderBy('date')
+            ->groupBy('date');
         return new JsonResponse($statistic->get());
     }
 
@@ -39,7 +49,9 @@ class StatisticController extends Controller
         if ($request->publisher_id && Auth::user()->isAdmin()) {
             $statistic->where('publisher_id', $request->publisher_id);
         }
-        $statistic->where('date', '>=', Carbon::now())->groupBy('country')->limit(10);
+        $statistic->where('date', '>=', $this->beginningOfCurrentYear)
+            ->groupBy('country')
+            ->limit(10);
         return new JsonResponse($statistic->get());
     }
 
@@ -53,7 +65,10 @@ class StatisticController extends Controller
         if ($request->publisher_id && Auth::user()->isAdmin()) {
             $statistic->where('publisher_id', $request->publisher_id);
         }
-        $statistic->where('date', '>=', Carbon::now())->orderBy('count', 'desc')->groupBy('advertisement_id')->limit(5);
+        $statistic->where('date', '>=', $this->beginningOfCurrentYear)
+            ->orderBy('count', 'desc')
+            ->groupBy('advertisement_id')
+            ->limit(5);
         return new JsonResponse($statistic->get());
     }
 }
